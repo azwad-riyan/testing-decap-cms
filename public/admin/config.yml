@@ -1,0 +1,26 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/images/products"
+public_folder: "/images/products"
+
+collections:
+  - name: "products"
+    label: "Products"
+    folder: "src/content/products"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Price", name: "price", widget: "number" }
+      - { label: "Size", name: "size", widget: "string", default: "50ml" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Short Description", name: "short_description", widget: "string" }
+      - { label: "Full Description", name: "description", widget: "text" }
+      - { label: "Top Notes", name: "top_notes", widget: "string" }
+      - { label: "Middle Notes", name: "middle_notes", widget: "string" }
+      - { label: "Base Notes", name: "base_notes", widget: "string" }
+      - { label: "Stock", name: "stock", widget: "select", options: ["In Stock", "Limited Stock", "Out of Stock"] }
+      - { label: "WhatsApp Number", name: "whatsapp_number", widget: "string" }
+      - { label: "Facebook Link", name: "facebook_link", widget: "string" }

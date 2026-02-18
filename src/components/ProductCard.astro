@@ -1,0 +1,39 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  product: CollectionEntry<'products'>;
+}
+
+const { product } = Astro.props;
+const { data, slug } = product;
+---
+
+<div class="group relative bg-secondary/30 border border-white/5 overflow-hidden transition-all duration-300 hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10">
+    <!-- Image Container with Aspect Ratio -->
+    <div class="aspect-square overflow-hidden relative">
+        <img 
+            src={data.image} 
+            alt={data.title}
+            class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out"
+            loading="lazy"
+        />
+        <!-- Overlay on hover -->
+        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300"></div>
+    </div>
+
+    <!-- Product Info -->
+    <div class="p-6 text-center">
+        <h3 class="text-xl font-serif text-cream mb-1 tracking-wide">{data.title}</h3>
+        <p class="text-xs text-accent uppercase tracking-widest mb-3">{data.size}</p>
+        <p class="text-sm text-muted line-clamp-2 mb-4 h-10">{data.short_description}</p>
+        <p class="text-lg font-medium text-cream mb-4">৳{data.price}</p>
+        
+        <button 
+            class="view-details-btn inline-block border border-white/20 text-cream px-6 py-2 text-xs uppercase tracking-widest hover:border-accent hover:text-accent transition-colors duration-300 w-full"
+            data-product={JSON.stringify(data)}
+        >
+            View Details
+        </button>
+    </div>
+</div>

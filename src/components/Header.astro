@@ -1,0 +1,43 @@
+---
+---
+
+<header class="fixed w-full top-0 z-50 transition-all duration-300 py-4">
+    <div class="container mx-auto px-6 flex justify-between items-center text-cream">
+        <a href="#" class="text-2xl font-serif tracking-widest hover:text-accent transition-colors">
+            NOOR ELIXIR
+        </a>
+        
+        <nav class="hidden md:flex space-x-8 text-sm tracking-wide uppercase">
+            <a href="#home" class="hover:text-accent transition-colors">Home</a>
+            <a href="#collection" class="hover:text-accent transition-colors">Collection</a>
+            <a href="#about" class="hover:text-accent transition-colors">About</a>
+            <a href="#contact" class="hover:text-accent transition-colors">Contact</a>
+        </nav>
+
+        <!-- Mobile Menu Button (Hamburger) -->
+        <button id="menu-btn" class="md:hidden text-cream focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-secondary/95 backdrop-blur-md border-b border-white/5 md:hidden">
+        <nav class="flex flex-col items-center py-6 space-y-4 text-sm tracking-wide uppercase">
+            <a href="#home" class="hover:text-accent transition-colors">Home</a>
+            <a href="#collection" class="hover:text-accent transition-colors">Collection</a>
+            <a href="#about" class="hover:text-accent transition-colors">About</a>
+            <a href="#contact" class="hover:text-accent transition-colors">Contact</a>
+        </nav>
+    </div>
+</header>
+
+<script>
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuBtn?.addEventListener('click', () => {
+        mobileMenu?.classList.toggle('hidden');
+    });
+</script>

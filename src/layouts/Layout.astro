@@ -1,0 +1,40 @@
+---
+interface Props {
+	title: string;
+    description?: string;
+}
+
+const { title, description = "Luxury concentrated perfume oils inspired by world-class fragrances. Order directly via WhatsApp." } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+        <meta name="theme-color" content="#0F0F0F" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:type" content="website" />
+		<title>{title}</title>
+	</head>
+	<body class="bg-primary text-cream font-sans antialiased overflow-x-hidden">
+		<slot />
+        <script>
+            // Add slight blur effect to header on scroll if needed
+            const header = document.querySelector('header');
+            if (header) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 50) {
+                        header.classList.add('bg-primary/90', 'backdrop-blur-md', 'border-b', 'border-white/5');
+                    } else {
+                        header.classList.remove('bg-primary/90', 'backdrop-blur-md', 'border-b', 'border-white/5');
+                    }
+                });
+            }
+        </script>
+	</body>
+</html>

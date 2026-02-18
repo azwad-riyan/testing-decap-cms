@@ -1,0 +1,399 @@
+PROJECT SPECIFICATION DOCUMENT
+1. Project Overview
+
+Website Name: Noor Elixir
+Domain (suggested): noorelixir.com
+Type: Single-page static e-commerce showcase
+Product Type: Premium Perfume Oils
+Total Products: 8
+Platform: Netlify (Free Tier)
+Repository: GitHub
+CMS: Decap CMS (formerly Netlify CMS)
+Architecture: Static site + Git-based CMS
+
+Purpose:
+Showcase 8 luxury perfume oils with premium aesthetic branding.
+Orders will be handled via WhatsApp and Facebook Messenger only.
+No payment gateway. No cart system.
+
+2. Brand Identity
+Brand Positioning
+
+Luxury, minimal, high-end Arabic/European fusion aesthetic.
+
+Target Feel
+
+Similar premium vibe like:
+
+Gucci
+
+Chanel
+
+Dior
+
+Not copying — only inspired by luxury minimalism.
+
+3. Design System
+Color Palette
+
+Primary Background:
+#0F0F0F (Deep Charcoal Black)
+
+Secondary Background:
+#181818
+
+Accent Gold:
+#C6A75E
+
+Soft Cream Text:
+#F5F5F2
+
+Muted Gray Text:
+#9A9A9A
+
+Hover Gold Glow:
+rgba(198,167,94,0.4)
+
+Typography
+
+Headings:
+Playfair Display (Elegant serif)
+
+Body Text:
+Inter or Poppins
+
+Logo Style:
+Elegant serif uppercase
+
+Logo
+
+Text-based logo:
+NOOR ELIXIR
+
+Gold text on black background.
+Minimal monogram icon optional (NE inside gold circle).
+
+4. Page Structure (Single Page Layout)
+4.1 Header (Sticky)
+
+Logo (left)
+
+Navigation (right):
+
+Home
+
+Collection
+
+About
+
+Contact
+
+On mobile:
+Hamburger menu.
+
+Header must:
+
+Be sticky
+
+Have slight blur background effect
+
+Smooth scroll navigation
+
+4.2 Hero Section
+
+Full width.
+Background: luxury perfume bottle macro image (dark aesthetic).
+Overlay gradient black.
+
+Content:
+Headline:
+“Discover Timeless Luxury”
+
+Subtext:
+Premium Concentrated Perfume Oils
+
+Button:
+Explore Collection (scrolls to products)
+
+4.3 Product Grid Section
+
+8 Products displayed in responsive grid.
+
+Desktop:
+4 columns
+
+Tablet:
+2 columns
+
+Mobile:
+1 column
+
+Each product card contains:
+
+Product Image (square 1:1 ratio)
+
+Name
+
+30ml / 50ml tag
+
+Price (in BDT)
+
+Short description (1 line)
+
+“View Details” button
+
+Hover effect:
+
+Slight zoom
+
+Gold border glow
+
+Smooth transition 0.3s ease
+
+5. Product Popup System (IMPORTANT)
+
+When clicking a product:
+
+DO NOT navigate to new page.
+
+Instead:
+Open a centered modal popup.
+
+Popup features:
+
+Left side:
+Large product image
+
+Right side:
+
+Product Name
+
+Full Description
+
+Notes (Top / Middle / Base)
+
+Size options
+
+Price
+
+Stock status
+
+Order Buttons
+
+Popup must:
+
+Have dark blurred background overlay
+
+Close button top-right
+
+Close when clicking outside
+
+Smooth fade animation
+
+6. Order System (No Cart)
+
+Inside popup:
+
+Two buttons:
+
+Order via WhatsApp
+
+Order via Facebook
+
+WhatsApp Link Format
+
+Dynamic message format:
+
+https://wa.me/880XXXXXXXXXX?text=I
+ want to order [Product Name]
+
+The product name must auto-insert dynamically.
+
+Facebook Link
+
+Direct link to:
+Facebook Business Page Messenger.
+
+7. CMS Configuration (Decap CMS)
+
+CMS Path:
+/admin
+
+Files Required:
+/admin/index.html
+/admin/config.yml
+
+Content Structure
+
+/products/
+oud-royal.md
+amber-noir.md
+musk-velvet.md
+
+Each product file:
+
+---
+title: "Oud Royal"
+price: 1800
+size: "50ml"
+image: "/images/products/oud-royal.jpg"
+short_description: "Deep woody Arabic oud."
+description: "Full detailed description here."
+top_notes: "Saffron, Bergamot"
+middle_notes: "Rose, Oud"
+base_notes: "Amber, Musk"
+stock: "In Stock"
+whatsapp_number: "8801XXXXXXXXX"
+facebook_link: "https://facebook.com/yourpage"
+---
+
+config.yml Example
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/products"
+public_folder: "/images/products"
+
+collections:
+  - name: "products"
+    label: "Products"
+    folder: "products"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Price", name: "price", widget: "number" }
+      - { label: "Size", name: "size", widget: "string" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Short Description", name: "short_description", widget: "string" }
+      - { label: "Full Description", name: "description", widget: "text" }
+      - { label: "Top Notes", name: "top_notes", widget: "string" }
+      - { label: "Middle Notes", name: "middle_notes", widget: "string" }
+      - { label: "Base Notes", name: "base_notes", widget: "string" }
+      - { label: "Stock", name: "stock", widget: "string" }
+      - { label: "WhatsApp Number", name: "whatsapp_number", widget: "string" }
+      - { label: "Facebook Link", name: "facebook_link", widget: "string" }
+
+8. Technical Stack
+
+Preferred Stack:
+
+Option A (Simple):
+
+Vite + Vanilla JS
+
+Markdown parsing
+
+Static build
+
+Option B (Better structure):
+
+Astro
+
+Tailwind CSS
+
+Markdown collection
+
+Pre-rendered static output
+
+Must be:
+Fully static generated.
+
+9. Performance Requirements
+
+Target:
+
+Lighthouse score:
+90+ Performance
+90+ Accessibility
+90+ Best Practices
+90+ SEO
+
+Image Optimization:
+
+Use WebP format
+
+Max 300KB per image
+
+Lazy loading enabled
+
+No heavy libraries.
+No unnecessary animations.
+
+10. SEO Setup
+
+Meta Title:
+Noor Elixir | Premium Perfume Oils in Bangladesh
+
+Meta Description:
+Luxury concentrated perfume oils inspired by world-class fragrances. Order directly via WhatsApp.
+
+Open Graph tags included.
+
+11. Footer Section
+
+Brand logo
+
+Short description
+
+Contact info
+
+WhatsApp link
+
+Facebook link
+
+Copyright
+
+12. Security & Access
+
+Enable in Netlify:
+
+Identity
+
+Git Gateway
+
+Only admin email allowed.
+
+13. Deployment Workflow
+
+Developer pushes to GitHub
+
+Netlify auto builds
+
+CMS edits commit to GitHub
+
+Auto rebuild
+
+No manual FTP.
+
+14. Mobile Optimization
+
+Must:
+
+Load under 2 seconds in Bangladesh 4G
+
+Responsive typography
+
+Touch-friendly buttons
+
+Popup scrollable
+
+15. Future Scalability
+
+Must allow:
+
+Adding more products via CMS
+
+Editing price easily
+
+Changing WhatsApp number globally
+
+Final Goal
+
+A premium, ultra-fast, static luxury perfume showcase website
+Hosted on Netlify free tier
+Managed fully through Decap CMS
+No backend
+No database
+No payment gateway

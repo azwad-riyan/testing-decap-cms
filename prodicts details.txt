@@ -1,0 +1,147 @@
+Your images should be inside:
+
+/images/products/
+    1.jpg
+    2.jpg
+    3.jpg
+    ...
+    8.jpg
+
+
+Now below are the 8 ready-made product files.
+Just copy each one into separate .md files inside /products/.
+
+📁 Folder Structure You Must Create
+root/
+ ├── products/
+ ├── images/
+ │     └── products/
+ └── admin/
+
+1️⃣ products/oud-royal.md
+---
+title: "Oud Royal"
+price: 2200
+size: "50ml"
+image: "/images/products/1.jpg"
+short_description: "Deep woody Arabian oud essence."
+description: "Oud Royal is a bold and luxurious fragrance crafted for those who appreciate rich oriental depth. The scent opens with warm spices, develops into a heart of smoky oud, and settles into a powerful amber-musk base. Long-lasting and highly concentrated."
+top_notes: "Saffron, Bergamot"
+middle_notes: "Rose, Agarwood (Oud)"
+base_notes: "Amber, Musk"
+stock: "In Stock"
+whatsapp_number: "8801XXXXXXXXX"
+facebook_link: "https://facebook.com/noorelixir"
+---
+
+2️⃣ products/amber-noir.md
+---
+title: "Amber Noir"
+price: 1800
+size: "50ml"
+image: "/images/products/2.jpg"
+short_description: "Warm amber with sensual sweetness."
+description: "Amber Noir blends golden amber with subtle vanilla and smooth woods. Perfect for evening wear, this fragrance creates a warm aura that feels elegant and mysterious."
+top_notes: "Mandarin, Pink Pepper"
+middle_notes: "Amber, Jasmine"
+base_notes: "Vanilla, Sandalwood"
+stock: "In Stock"
+whatsapp_number: "8801XXXXXXXXX"
+facebook_link: "https://facebook.com/noorelixir"
+---
+
+3️⃣ products/musk-velvet.md
+---
+title: "Musk Velvet"
+price: 1600
+size: "50ml"
+image: "/images/products/3.jpg"
+short_description: "Soft white musk with creamy texture."
+description: "Musk Velvet is smooth, clean, and intimate. Designed for daily elegance, this fragrance wraps you in soft white musk balanced with floral undertones."
+top_notes: "Lily, Citrus"
+middle_notes: "White Musk"
+base_notes: "Cashmere Wood, Vanilla"
+stock: "In Stock"
+whatsapp_number: "8801XXXXXXXXX"
+facebook_link: "https://facebook.com/noorelixir"
+---
+
+4️⃣ products/rose-empress.md
+---
+title: "Rose Empress"
+price: 2000
+size: "50ml"
+image: "/images/products/4.jpg"
+short_description: "Royal rose with modern elegance."
+description: "Rose Empress celebrates the richness of blooming roses blended with oriental warmth. A powerful yet graceful scent made for confident personalities."
+top_notes: "Fresh Rose, Lychee"
+middle_notes: "Turkish Rose"
+base_notes: "Patchouli, Amber"
+stock: "In Stock"
+whatsapp_number: "8801XXXXXXXXX"
+facebook_link: "https://facebook.com/noorelixir"
+---
+
+5️⃣ products/imperial-oud.md
+---
+title: "Imperial Oud"
+price: 2500
+size: "50ml"
+image: "/images/products/5.jpg"
+short_description: "Intense luxury oud masterpiece."
+description: "Imperial Oud is powerful, smoky, and sophisticated. Built for special occasions, this perfume leaves a bold and unforgettable trail."
+top_notes: "Cardamom, Black Pepper"
+middle_notes: "Oud Wood"
+base_notes: "Leather, Amber"
+stock: "Limited Stock"
+whatsapp_number: "8801XXXXXXXXX"
+facebook_link: "https://facebook.com/noorelixir"
+---
+
+6️⃣ products/golden-vanille.md
+---
+title: "Golden Vanille"
+price: 1700
+size: "50ml"
+image: "/images/products/6.jpg"
+short_description: "Sweet vanilla with golden warmth."
+description: "Golden Vanille offers creamy sweetness blended with warm spices. Ideal for winter evenings and cozy gatherings."
+top_notes: "Caramel"
+middle_notes: "Vanilla Orchid"
+base_notes: "Tonka Bean, Amber"
+stock: "In Stock"
+whatsapp_number: "8801XXXXXXXXX"
+facebook_link: "https://facebook.com/noorelixir"
+---
+
+7️⃣ products/ocean-mystique.md
+---
+title: "Ocean Mystique"
+price: 1500
+size: "50ml"
+image: "/images/products/7.jpg"
+short_description: "Fresh aquatic modern scent."
+description: "Ocean Mystique captures the freshness of sea breeze mixed with woody depth. A clean, energetic scent perfect for daytime wear."
+top_notes: "Marine Notes, Lemon"
+middle_notes: "Lavender"
+base_notes: "Cedarwood, Musk"
+stock: "In Stock"
+whatsapp_number: "8801XXXXXXXXX"
+facebook_link: "https://facebook.com/noorelixir"
+---
+
+8️⃣ products/midnight-elixir.md
+---
+title: "Midnight Elixir"
+price: 2100
+size: "50ml"
+image: "/images/products/8.jpg"
+short_description: "Dark, seductive evening fragrance."
+description: "Midnight Elixir is mysterious and captivating. With deep woody accords and subtle sweetness, it is designed for night events and special moments."
+top_notes: "Blackcurrant"
+middle_notes: "Incense"
+base_notes: "Oud, Patchouli"
+stock: "In Stock"
+whatsapp_number: "8801XXXXXXXXX"
+facebook_link: "https://facebook.com/noorelixir"
+---
