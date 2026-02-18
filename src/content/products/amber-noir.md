@@ -10,7 +10,7 @@ description: Amber Noir blends golden amber with subtle vanilla and smooth
 top_notes: Mandarin, Pink Pepper
 middle_notes: Amber, Jasmine
 base_notes: Vanilla, Sandalwood
-stock: In Stock
+stock: Out of Stock
 whatsapp_number: 8801XXXXXXXXX
 facebook_link: https://facebook.com/noorelixir
 ---
