@@ -19,7 +19,8 @@ const { title, description = "Luxury concentrated perfume oils inspired by world
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:type" content="website" />
-		<title>{title}</title>
+	<title>{title}</title>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 	</head>
 	<body class="bg-primary text-cream font-sans antialiased overflow-x-hidden">
 		<slot />
@@ -36,5 +37,16 @@ const { title, description = "Luxury concentrated perfume oils inspired by world
                 });
             }
         </script>
+        <script>
+            if (window.netlifyIdentity) {
+              window.netlifyIdentity.on("init", user => {
+                if (!user) {
+                  window.netlifyIdentity.on("login", () => {
+                    document.location.href = "/admin/";
+                  });
+                }
+              });
+            }
+          </script>
 	</body>
 </html>
