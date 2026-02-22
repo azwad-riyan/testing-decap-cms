@@ -12,21 +12,15 @@ const products = await getCollection('products');
 // products.sort((a, bPrice) => a.data.price - b.data.price);
 ---
 
-<Layout title="Noor Elixir | Premium Perfume Oils">
+<Layout>
     <Header />
     
     <main>
         <Hero />
         
-        <section id="collection" class="py-20 bg-primary">
+        <!-- Product Grid (The core offering) -->
+        <section id="collection" class="py-16 bg-secondary border-t border-b border-muted/20">
             <div class="container mx-auto px-6">
-                <div class="text-center mb-16">
-                    <span class="text-accent text-sm uppercase tracking-[0.3em] block mb-2">Our Collection</span>
-                    <h2 class="text-3xl md:text-4xl font-serif text-cream">Exquisite Fragrances</h2>
-                    <div class="w-24 h-px bg-accent/50 mx-auto mt-6"></div>
-                </div>
-
-                <!-- Product Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {products.map((product) => (
                         <ProductCard product={product} />
@@ -35,33 +29,96 @@ const products = await getCollection('products');
             </div>
         </section>
 
-        <!-- About Section (Simple) -->
-        <section id="about" class="py-20 bg-secondary relative overflow-hidden">
-             <!-- Background Texture -->
-             <div class="absolute inset-0 opacity-5 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-accent/20 via-transparent to-transparent"></div>
-
-            <div class="container mx-auto px-6 relative z-10 text-center max-w-3xl">
-                <span class="text-accent text-sm uppercase tracking-[0.3em] block mb-4">The Essence</span>
-                <h2 class="text-3xl md:text-4xl font-serif text-cream mb-8">Crafted for Excellence</h2>
-                <p class="text-muted leading-relaxed text-lg font-light mb-8">
-                    Noor Elixir represents the pinnacle of olfactory artistry. Our concentrated perfume oils are sourced from the finest ingredients across the globe—blending the rich heritage of Arabian Ouds with the modern sophistication of European perfumery.
+        <!-- SECTION 2: Men's Premium Perfume -->
+        <section id="mens-perfume" class="py-16 bg-primary border-b border-muted/20">
+            <div class="container mx-auto px-6 max-w-4xl text-center">
+                <h2 class="text-3xl font-serif text-cream mb-6">Best Premium Perfume for Men in Bangladesh</h2>
+                <p class="text-muted leading-relaxed font-light mb-8">
+                    Elevate your presence with the <strong class="text-cream font-normal">best long lasting perfume for men BD</strong>. Our collection features exclusive scents inspired by world-class fragrances. Whether you are looking for an <strong class="text-cream font-normal">original Dior Sauvage price in Bangladesh</strong> equivalent or an <strong class="text-cream font-normal">authentic Creed Aventus BD</strong> alternative, our <strong class="text-cream font-normal">luxury men's fragrance BD</strong> collection is crafted to perfection.
                 </p>
-                <div class="grid grid-cols-3 gap-8 text-center mt-12 border-t border-white/5 pt-12">
-                    <div>
-                        <h3 class="text-2xl font-serif text-accent mb-2">100%</h3>
-                        <p class="text-xs text-muted uppercase tracking-widest">Alcohol Free</p>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-serif text-accent mb-2">Long</h3>
-                        <p class="text-xs text-muted uppercase tracking-widest">Lasting</p>
-                    </div>
-                     <div>
-                        <h3 class="text-2xl font-serif text-accent mb-2">Premium</h3>
-                        <p class="text-xs text-muted uppercase tracking-widest">Quality</p>
-                    </div>
-                </div>
+                <div class="w-16 h-px bg-accent/50 mx-auto"></div>
             </div>
         </section>
+
+        <!-- SECTION 3: Women's Premium Perfume -->
+        <section id="womens-perfume" class="py-16 bg-secondary relative">
+            <div class="absolute inset-0 opacity-5 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-accent/20 via-transparent to-transparent"></div>
+            <div class="container mx-auto px-6 max-w-4xl text-center relative z-10">
+                <h2 class="text-3xl font-serif text-cream mb-6">Best Premium Perfume for Women in Bangladesh</h2>
+                <p class="text-muted leading-relaxed font-light">
+                    Discover the essence of femininity with our <strong class="text-cream font-normal">premium floral perfume Bangladesh</strong> collection. From delicate notes to bold statements, find the <strong class="text-cream font-normal">best long lasting perfume for women BD</strong>. Experience the allure of an <strong class="text-cream font-normal">authentic Chanel perfume for women BD</strong> inspiration, bringing you the finest <strong class="text-cream font-normal">luxury ladies perfume BD</strong> has to offer.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 4: Niche & Luxury Collection -->
+        <section id="niche-collection" class="py-16 bg-primary border-t border-muted/20">
+            <div class="container mx-auto px-6 max-w-4xl text-center">
+                <h2 class="text-3xl font-serif text-cream mb-6">High-End & Niche Perfume Collection in Bangladesh</h2>
+                <p class="text-muted leading-relaxed font-light mb-8">
+                    For the connoisseurs of fine fragrances. Explore our <strong class="text-cream font-normal">exclusive fragrance collection BD</strong>. We specialize in bringing the essence of an <strong class="text-cream font-normal">original French perfume in Bangladesh</strong> directly to you. Dive into our rich, <strong class="text-cream font-normal">authentic Arabian perfume BD</strong> and exquisite <strong class="text-cream font-normal">premium oud perfume Bangladesh</strong> selections, defining the true <strong class="text-cream font-normal">niche perfume Bangladesh</strong> experience.
+                </p>
+                <div class="w-16 h-px bg-accent/50 mx-auto"></div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: Nationwide Delivery -->
+        <section id="delivery" class="py-16 bg-primary">
+            <div class="container mx-auto px-6 max-w-4xl text-center">
+                <h2 class="text-3xl font-serif text-cream mb-6">Perfume Delivery All Over Bangladesh</h2>
+                <p class="text-muted leading-relaxed font-light mb-8">
+                    As a <strong class="text-cream font-normal">trusted perfume shop online BD</strong>, we ensure safe and fast delivery. <strong class="text-cream font-normal">Buy authentic perfume online BD</strong> and enjoy our <strong class="text-cream font-normal">original perfume cash on delivery BD</strong> service. We cover all major cities including Dhaka, Chittagong, Sylhet, Khulna, Rajshahi, and Barisal. Your signature scent is just a click away.
+                </p>
+                <div class="w-16 h-px bg-accent/50 mx-auto"></div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: Perfume Gifts -->
+        <section id="gifts" class="py-16 bg-secondary relative">
+            <div class="absolute inset-0 opacity-5 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-accent/20 via-transparent to-transparent"></div>
+            <div class="container mx-auto px-6 max-w-4xl text-center relative z-10">
+                <h2 class="text-3xl font-serif text-cream mb-6">Luxury Perfume Gift Sets in Bangladesh</h2>
+                <p class="text-muted leading-relaxed font-light">
+                    Give the gift of luxury. Perfect for any occasion, our sets are the ideal <strong class="text-cream font-normal">premium perfume gift set Bangladesh</strong>. Whether you need a memorable <strong class="text-cream font-normal">wedding perfume gift set BD</strong>, a romantic <strong class="text-cream font-normal">Valentine's Day perfume gift BD</strong>, or a thoughtful <strong class="text-cream font-normal">anniversary perfume gift Bangladesh</strong>, we have the perfect fragrance for your loved ones.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 7: Local Dhaka SEO Block -->
+        <section id="dhaka" class="py-16 bg-primary border-t border-muted/20">
+            <div class="container mx-auto px-6 max-w-4xl text-center">
+                <h2 class="text-3xl font-serif text-cream mb-6">Premium Perfume Shop in Dhaka</h2>
+                <p class="text-muted leading-relaxed font-light">
+                    Located in the heart of the capital, SCENTER is your go-to destination for authentic fragrances. We proudly serve customers throughout <strong class="text-cream font-normal">Banani</strong>, <strong class="text-cream font-normal">Gulshan</strong>, and <strong class="text-cream font-normal">Dhanmondi</strong>, providing an unparalleled local shopping experience with world-class standards.
+                </p>
+            </div>
+        </section>
+
+        <!-- FAQ Schema -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Where can I buy authentic premium perfume in Bangladesh?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You can buy authentic premium perfumes online from SCENTER with guaranteed originality and cash on delivery all over Bangladesh."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Do you deliver perfume outside Dhaka?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, we offer nationwide delivery including Chittagong, Sylhet, Khulna, Rajshahi, and Barisal with secure packaging."
+              }
+            }
+          ]
+        }
+        </script>
     </main>
 
     <ProductModal />

@@ -4,11 +4,13 @@ export default {
     theme: {
         extend: {
             colors: {
-                primary: '#0F0F0F',
-                secondary: '#181818',
-                accent: '#C6A75E',
-                cream: '#F5F5F2',
-                muted: '#9A9A9A',
+                primary: 'rgb(var(--color-primary) / <alpha-value>)',
+                secondary: 'rgb(var(--color-secondary) / <alpha-value>)',
+                accent: 'rgb(var(--color-accent) / <alpha-value>)',
+                cream: 'rgb(var(--color-cream) / <alpha-value>)',
+                muted: 'rgb(var(--color-muted) / <alpha-value>)',
+                dark: '#0F0F0F',
+                light: '#F5F5F2',
             },
             fontFamily: {
                 serif: ['Playfair Display', 'serif'],

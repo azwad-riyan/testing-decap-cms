@@ -4,17 +4,16 @@ const products = defineCollection({
     type: 'content',
     schema: z.object({
         title: z.string(),
-        price: z.number(),
-        size: z.string(),
         image: z.string(),
-        short_description: z.string(),
-        description: z.string(),
+        images: z.array(z.string()).optional(), // extra gallery images (future use)
+        price_6ml: z.number(),
+        price_15ml: z.number(),
         top_notes: z.string(),
-        middle_notes: z.string(),
+        heart_notes: z.string(),
         base_notes: z.string(),
-        stock: z.string(),
-        whatsapp_number: z.string(),
-        facebook_link: z.string(),
+        accords: z.string(),
+        longevity: z.string(),
+        projection: z.string(),
     }),
 });
 

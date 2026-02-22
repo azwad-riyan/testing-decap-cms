@@ -1,14 +1,12 @@
 ---
-title: "Rose Empress"
-price: 2000
-size: "50ml"
+title: "Afnan 9PM Rebel"
 image: "/images/products/4.jpg"
-short_description: "Royal rose with modern elegance."
-description: "Rose Empress celebrates the richness of blooming roses blended with oriental warmth. A powerful yet graceful scent made for confident personalities."
-top_notes: "Fresh Rose, Lychee"
-middle_notes: "Turkish Rose"
-base_notes: "Patchouli, Amber"
-stock: "In Stock"
-whatsapp_number: "8801XXXXXXXXX"
-facebook_link: "https://facebook.com/noorelixir"
+price_6ml: 450
+price_15ml: 850
+top_notes: "Pineapple, Mandarin, Granny Smith Apple"
+heart_notes: "Cedarwood, Oakmoss, Vanilla"
+base_notes: "Caramel, Ambergris, Dry Woods, Musk"
+accords: "Fruity, Woody, Sweet, Amber, Gourmand"
+longevity: "5–6 Hours"
+projection: "1–1.5 Hours"
 ---

@@ -1,14 +1,12 @@
 ---
-title: "Golden Vanille"
-price: 1700
-size: "50ml"
+title: "Vampire Blood"
 image: "/images/products/6.jpg"
-short_description: "Sweet vanilla with golden warmth."
-description: "Golden Vanille offers creamy sweetness blended with warm spices. Ideal for winter evenings and cozy gatherings."
-top_notes: "Caramel"
-middle_notes: "Vanilla Orchid"
-base_notes: "Tonka Bean, Amber"
-stock: "In Stock"
-whatsapp_number: "8801XXXXXXXXX"
-facebook_link: "https://facebook.com/noorelixir"
+price_6ml: 400
+price_15ml: 800
+top_notes: "Red Berries, Black Cherries"
+heart_notes: "Cherry, Floral Notes, Jasmine"
+base_notes: "Floral Notes, Sour Notes, Patchouli, White Musk"
+accords: "Fruity, Smoky, Sweet, Oriental, Leathery"
+longevity: "4–6 Hours"
+projection: "1–1.5 Hours"
 ---

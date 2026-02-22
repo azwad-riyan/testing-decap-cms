@@ -1,14 +1,12 @@
 ---
-title: "Midnight Elixir"
-price: 2100
-size: "50ml"
+title: "Hawas Fire"
 image: "/images/products/8.jpg"
-short_description: "Dark, seductive evening fragrance."
-description: "Midnight Elixir is mysterious and captivating. With deep woody accords and subtle sweetness, it is designed for night events and special moments."
-top_notes: "Blackcurrant"
-middle_notes: "Incense"
-base_notes: "Oud, Patchouli"
-stock: "In Stock"
-whatsapp_number: "8801XXXXXXXXX"
-facebook_link: "https://facebook.com/noorelixir"
+price_6ml: 450
+price_15ml: 850
+top_notes: "Clary Sage"
+heart_notes: "Smoky Accords, Egyptian Jasmine, Marine Notes"
+base_notes: "Ambergris, Amber, Mineral Notes"
+accords: "Aromatic, Amber, Floral, Herbal, Musky"
+longevity: "6–7 Hours"
+projection: "1.5–2 Hours"
 ---

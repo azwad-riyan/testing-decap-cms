@@ -1,16 +1,12 @@
 ---
-title: Amber Noir
-price: 1801
-size: 50ml
-image: /images/products/2.jpg
-short_description: Warm amber with sensual sweetness.
-description: Amber Noir blends golden amber with subtle vanilla and smooth
-  woods. Perfect for evening wear, this fragrance creates a warm aura that feels
-  elegant and mysterious.
-top_notes: Mandarin, Pink Pepper
-middle_notes: Amber, Jasmine
-base_notes: Vanilla, Sandalwood
-stock: Out of Stock
-whatsapp_number: 8801XXXXXXXXX
-facebook_link: https://facebook.com/noorelixir
+title: "Soft Moon"
+image: "/images/products/2.jpg"
+price_6ml: 450
+price_15ml: 850
+top_notes: "Red Lychee, Kiwi, Quince"
+heart_notes: "White Chocolate, Cupcake, Jasmine, Orchid"
+base_notes: "Vanilla, Musk, Soft Woods"
+accords: "Fruity, Sweet, Tropical, Gourmand, Floral"
+longevity: "6–8 Hours"
+projection: "2–2.5 Hours"
 ---
