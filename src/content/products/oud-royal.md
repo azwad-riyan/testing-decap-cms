@@ -14,6 +14,6 @@ projection: 1.5–2 Hours
 featured: true
 new_arrival: false
 bestseller: true
-on_sale: false
+on_sale: true
 display_order: 1
 ---
