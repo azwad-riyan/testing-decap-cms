@@ -31,7 +31,7 @@ const allSorted = [...allProducts].sort(sortByOrder);
         {featured.length > 0 && <Carousel title="Featured Collection" products={featured} />}
 
         <!-- 3. ON SALE — Carousel -->
-        {onSale.length > 0 && <Carousel title="On Sale" products={onSale} />}
+        {onSale.length > 0 && <Carousel title="On Sale" products={onSale} variant="sale" />}
 
         <!-- 4. OUR COLLECTION — Full Grid -->
         <section id="collection" class="py-16 relative">

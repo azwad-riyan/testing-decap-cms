@@ -7,6 +7,12 @@ interface Props {
 
 const { product } = Astro.props;
 const { data, slug } = product;
+
+// Sale calculation
+const isOnSale = data.on_sale && data.sale_price_6ml && data.sale_price_6ml < data.price_6ml;
+const savePercent = isOnSale
+    ? Math.round(((data.price_6ml - data.sale_price_6ml!) / data.price_6ml) * 100)
+    : 0;
 ---
 
 <div
@@ -27,6 +33,11 @@ const { data, slug } = product;
     <!-- Dark scrim on hover -->
     <div class="card-scrim"></div>
 
+    <!-- Sale badge -->
+    {isOnSale && (
+      <div class="card-sale-badge">SAVE {savePercent}%</div>
+    )}
+
     <!-- Accord badge on image -->
     <div class="card-accord-badge">
       {data.accords}
@@ -38,10 +49,19 @@ const { data, slug } = product;
     <!-- Title -->
     <h3 class="card-title">{data.title}</h3>
 
-    <!-- Price: show lowest only -->
+    <!-- Price -->
     <div class="card-price-row">
-      <span class="card-price-from">From</span>
-      <span class="card-price">৳{data.price_6ml}</span>
+      {isOnSale ? (
+        <>
+          <span class="card-price-original">৳{data.price_6ml}</span>
+          <span class="card-price card-price-sale">৳{data.sale_price_6ml}</span>
+        </>
+      ) : (
+        <>
+          <span class="card-price-from">From</span>
+          <span class="card-price">৳{data.price_6ml}</span>
+        </>
+      )}
     </div>
 
     <!-- View Details Button -->
@@ -221,6 +241,39 @@ const { data, slug } = product;
     color: #9a9387;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+  }
+
+  /* Crossed-out original price */
+  .card-price-original {
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: #7a756d;
+    text-decoration: line-through;
+    text-decoration-color: rgba(200,80,80,0.6);
+  }
+
+  /* Sale price highlight */
+  .card-price-sale {
+    color: #e8c87a;
+    font-weight: 700;
+  }
+
+  /* ─── Sale badge ────────────────────────────────── */
+  .card-sale-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 4;
+    padding: 5px 12px;
+    background: linear-gradient(135deg, #c04040, #d35050);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 6px;
+    box-shadow: 0 3px 10px rgba(192,64,64,0.4);
   }
 
   /* ─── Button ─────────────────────────────────────── */

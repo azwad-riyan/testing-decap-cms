@@ -4,9 +4,18 @@ import type { CollectionEntry } from 'astro:content';
 interface Props {
     title: string;
     products: CollectionEntry<'products'>[];
+    variant?: 'default' | 'sale';
 }
 
-const { title, products } = Astro.props;
+const { title, products, variant = 'default' } = Astro.props;
+
+// Helper: calc save %
+function savePercent(product: CollectionEntry<'products'>) {
+    const orig = product.data.price_6ml;
+    const sale = product.data.sale_price_6ml;
+    if (!sale || sale >= orig) return 0;
+    return Math.round(((orig - sale) / orig) * 100);
+}
 ---
 
 <section class="py-16 relative overflow-hidden">
@@ -23,24 +32,40 @@ const { title, products } = Astro.props;
         <!-- Horizontal scroll carousel -->
         <div class="carousel-wrapper reveal reveal-delay-2">
             <div class="carousel-track" data-carousel>
-                {products.map((product) => (
+                {products.map((product) => {
+                    const isSale = variant === 'sale' && product.data.sale_price_6ml;
+                    const pct = isSale ? savePercent(product) : 0;
+                    return (
                     <div class="carousel-slide">
-                        <div class="carousel-card group" data-card>
-                            <!-- Card shine -->
+                        <div class={`carousel-card group ${isSale ? 'carousel-card--sale' : ''}`} data-card>
+                            {/* Card shine */}
                             <div class="carousel-card-shine"></div>
                             
-                            <!-- Image -->
+                            {/* Image */}
                             <div class="carousel-img-wrap">
                                 <img src={product.data.image} alt={product.data.title} class="carousel-img" loading="lazy" />
                                 <div class="carousel-img-scrim"></div>
+                                {/* Sale badge */}
+                                {isSale && pct > 0 && (
+                                    <div class="carousel-sale-badge">SAVE {pct}%</div>
+                                )}
                             </div>
                             
-                            <!-- Info -->
+                            {/* Info */}
                             <div class="carousel-info">
                                 <h3 class="carousel-title">{product.data.title}</h3>
                                 <div class="carousel-price">
-                                    <span class="carousel-price-from">From</span>
-                                    <span class="carousel-price-val">৳{product.data.price_6ml}</span>
+                                    {isSale ? (
+                                        <>
+                                            <span class="carousel-price-original">৳{product.data.price_6ml}</span>
+                                            <span class="carousel-price-val carousel-price-sale">৳{product.data.sale_price_6ml}</span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <span class="carousel-price-from">From</span>
+                                            <span class="carousel-price-val">৳{product.data.price_6ml}</span>
+                                        </>
+                                    )}
                                 </div>
                                 <a 
                                     href={`#${product.slug}`} 
@@ -53,7 +78,8 @@ const { title, products } = Astro.props;
                             </div>
                         </div>
                     </div>
-                ))}
+                    );
+                })}
             </div>
 
             <!-- Scroll indicators -->
@@ -191,6 +217,41 @@ const { title, products } = Astro.props;
         color: #9a9387;
         text-transform: uppercase;
         letter-spacing: 0.05em;
+    }
+
+    /* ─── Sale variant ─── */
+    .carousel-card--sale {
+        border-color: rgba(192,64,64,0.15);
+    }
+
+    .carousel-sale-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 4;
+        padding: 5px 12px;
+        background: linear-gradient(135deg, #c04040, #d35050);
+        color: #fff;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        border-radius: 6px;
+        box-shadow: 0 3px 10px rgba(192,64,64,0.4);
+    }
+
+    .carousel-price-original {
+        font-size: 0.78rem;
+        font-weight: 400;
+        color: #7a756d;
+        text-decoration: line-through;
+        text-decoration-color: rgba(200,80,80,0.6);
+    }
+
+    .carousel-price-sale {
+        color: #e8c87a;
+        font-weight: 700;
     }
 
     /* ─── Button ─── */
