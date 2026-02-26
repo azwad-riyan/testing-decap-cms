@@ -1,19 +1,19 @@
 ---
-title: "Vampire Blood"
-image: "/images/products/6.jpg"
+title: Vampire Blood
+image: /images/products/6.jpg
 price_6ml: 400
 price_15ml: 800
-top_notes: "Red Berries, Black Cherries"
-heart_notes: "Cherry, Floral Notes, Jasmine"
-base_notes: "Floral Notes, Sour Notes, Patchouli, White Musk"
-accords: "Fruity, Smoky, Sweet, Oriental, Leathery"
-longevity: "4–6 Hours"
-projection: "1–1.5 Hours"
+sale_price_6ml: 350
+sale_price_15ml: 700
+top_notes: Red Berries, Black Cherries
+heart_notes: Cherry, Floral Notes, Jasmine
+base_notes: Floral Notes, Sour Notes, Patchouli, White Musk
+accords: Fruity, Smoky, Sweet, Oriental, Leathery
+longevity: 4–6 Hours
+projection: 1–1.5 Hours
 featured: true
 new_arrival: false
 bestseller: false
-on_sale: true
-sale_price_6ml: 350
-sale_price_15ml: 700
+on_sale: false
 display_order: 6
 ---
