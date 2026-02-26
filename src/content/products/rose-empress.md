@@ -9,4 +9,9 @@ base_notes: "Caramel, Ambergris, Dry Woods, Musk"
 accords: "Fruity, Woody, Sweet, Amber, Gourmand"
 longevity: "5–6 Hours"
 projection: "1–1.5 Hours"
+featured: true
+new_arrival: false
+bestseller: true
+on_sale: false
+display_order: 4
 ---

@@ -8,19 +8,70 @@ public_folder: "/images/products"
 collections:
   - name: "products"
     label: "Products"
+    label_singular: "Product"
     folder: "src/content/products"
     create: true
     slug: "{{slug}}"
+    sortable_fields: ["display_order", "title", "price_6ml"]
+    summary: "{{title}} — ৳{{price_6ml}} | Order: {{display_order}}"
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Price", name: "price", widget: "number" }
-      - { label: "Size", name: "size", widget: "string", default: "50ml" }
-      - { label: "Image", name: "image", widget: "image" }
-      - { label: "Short Description", name: "short_description", widget: "string" }
-      - { label: "Full Description", name: "description", widget: "text" }
+      # ─── Basic Info ───
+      - { label: "Title", name: "title", widget: "string", hint: "Product name" }
+      - { label: "Main Image", name: "image", widget: "image", hint: "Primary product photo" }
+      - label: "Gallery Images"
+        name: "images"
+        widget: "list"
+        required: false
+        field: { label: "Image", name: "src", widget: "image" }
+        hint: "Additional product photos for the modal gallery"
+
+      # ─── Pricing ───
+      - { label: "Price (6ML)", name: "price_6ml", widget: "number", value_type: "int", hint: "Price in BDT for 6ml" }
+      - { label: "Price (15ML)", name: "price_15ml", widget: "number", value_type: "int", hint: "Price in BDT for 15ml" }
+
+      # ─── Sale Pricing ───
+      - { label: "Sale Price (6ML)", name: "sale_price_6ml", widget: "number", value_type: "int", required: false, hint: "Discounted price for 6ml (leave empty if not on sale)" }
+      - { label: "Sale Price (15ML)", name: "sale_price_15ml", widget: "number", value_type: "int", required: false, hint: "Discounted price for 15ml (leave empty if not on sale)" }
+
+      # ─── Fragrance Details ───
       - { label: "Top Notes", name: "top_notes", widget: "string" }
-      - { label: "Middle Notes", name: "middle_notes", widget: "string" }
+      - { label: "Heart Notes", name: "heart_notes", widget: "string" }
       - { label: "Base Notes", name: "base_notes", widget: "string" }
-      - { label: "Stock", name: "stock", widget: "select", options: ["In Stock", "Limited Stock", "Out of Stock"] }
-      - { label: "WhatsApp Number", name: "whatsapp_number", widget: "string" }
-      - { label: "Facebook Link", name: "facebook_link", widget: "string" }
+      - { label: "Accords", name: "accords", widget: "string", hint: "e.g. Fruity, Sweet, Woody" }
+      - { label: "Longevity", name: "longevity", widget: "string", hint: "e.g. 6–8 Hours" }
+      - { label: "Projection", name: "projection", widget: "string", hint: "e.g. 2–2.5 Hours" }
+
+      # ─── Section Controls ───
+      - label: "Featured Collection"
+        name: "featured"
+        widget: "boolean"
+        default: false
+        hint: "Show in the Featured Collection carousel on homepage"
+
+      - label: "New Arrival"
+        name: "new_arrival"
+        widget: "boolean"
+        default: false
+        hint: "Show in the New Arrivals section"
+
+      - label: "Bestseller"
+        name: "bestseller"
+        widget: "boolean"
+        default: false
+        hint: "Show in the Best Sellers carousel"
+
+      - label: "On Sale"
+        name: "on_sale"
+        widget: "boolean"
+        default: false
+        hint: "Show in the On Sale carousel (set sale prices above)"
+
+      # ─── Display Order ───
+      - label: "Display Order"
+        name: "display_order"
+        widget: "number"
+        default: 50
+        value_type: "int"
+        min: 1
+        max: 999
+        hint: "Lower number = shown first in carousels and grids (1 = top priority)"

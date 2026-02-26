@@ -9,4 +9,9 @@ base_notes: "Amber, Musk, Resin"
 accords: "Woody, Amber, Musky"
 longevity: "5–6 Hours"
 projection: "1.5–2 Hours"
+featured: true
+new_arrival: false
+bestseller: true
+on_sale: false
+display_order: 1
 ---

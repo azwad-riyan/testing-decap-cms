@@ -9,4 +9,9 @@ base_notes: "Vanilla, Musk, Soft Woods"
 accords: "Fruity, Sweet, Tropical, Gourmand, Floral"
 longevity: "6–8 Hours"
 projection: "2–2.5 Hours"
+featured: true
+new_arrival: true
+bestseller: false
+on_sale: false
+display_order: 2
 ---

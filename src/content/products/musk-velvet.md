@@ -9,4 +9,11 @@ base_notes: "White Musk"
 accords: "Fruity, Floral, Musky, Fresh"
 longevity: "4–6 Hours"
 projection: "1–1.5 Hours"
+featured: false
+new_arrival: true
+bestseller: false
+on_sale: true
+sale_price_6ml: 300
+sale_price_15ml: 600
+display_order: 3
 ---

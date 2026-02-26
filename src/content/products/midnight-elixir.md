@@ -9,4 +9,9 @@ base_notes: "Ambergris, Amber, Mineral Notes"
 accords: "Aromatic, Amber, Floral, Herbal, Musky"
 longevity: "6–7 Hours"
 projection: "1.5–2 Hours"
+featured: false
+new_arrival: false
+bestseller: true
+on_sale: false
+display_order: 8
 ---

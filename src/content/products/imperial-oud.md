@@ -9,4 +9,9 @@ base_notes: "White Musk, Sandalwood, Ambroxan"
 accords: "Fresh, Aquatic, Clean, Musky"
 longevity: "6–7 Hours"
 projection: "2–2.5 Hours"
+featured: true
+new_arrival: true
+bestseller: true
+on_sale: false
+display_order: 5
 ---

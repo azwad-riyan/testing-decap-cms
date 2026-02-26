@@ -15,6 +15,14 @@ const frameFiles = Array.from({ length: TOTAL_FRAMES }, (_, i) =>
         <!-- Canvas for frame rendering -->
         <canvas id="hero-canvas" class="scroll-hero-canvas"></canvas>
         
+        <!-- Loading overlay -->
+        <div id="hero-loader" class="hero-loader">
+            <div class="hero-loader-inner">
+                <div class="hero-loader-ring"></div>
+                <p class="hero-loader-text" id="hero-loader-percent">0%</p>
+            </div>
+        </div>
+
         <!-- Text overlays — layered above canvas -->
         
         <!-- BEAT 1: Hero State (0–20%) — centered with dark backdrop -->
@@ -100,6 +108,52 @@ const frameFiles = Array.from({ length: TOTAL_FRAMES }, (_, i) =>
         height: 100%;
         object-fit: cover;
         z-index: 1;
+    }
+
+    /* ─── Loading overlay ─── */
+    .hero-loader {
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #0a0804;
+        transition: opacity 0.6s ease;
+    }
+
+    .hero-loader.loaded {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .hero-loader-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .hero-loader-ring {
+        width: 48px;
+        height: 48px;
+        border: 2px solid rgba(198,167,94,0.15);
+        border-top-color: #c6a75e;
+        border-radius: 50%;
+        animation: hero-spin 0.9s linear infinite;
+    }
+
+    @keyframes hero-spin {
+        to { transform: rotate(360deg); }
+    }
+
+    .hero-loader-text {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        color: rgba(198,167,94,0.7);
+        margin: 0;
     }
 
     /* ─── Overlay layers ─── */
@@ -350,16 +404,28 @@ const frameFiles = Array.from({ length: TOTAL_FRAMES }, (_, i) =>
             ctx.drawImage(img, x, y, w, h);
         }
 
-        // ─── Preload all frames ───
+        // ─── Preload all frames with progress ───
+        const loader = document.getElementById('hero-loader');
+        const loaderPercent = document.getElementById('hero-loader-percent');
+        const MIN_LOADED = 30; // minimum frames before hiding loader
+
         function preloadFrames() {
             frameFiles.forEach((src, i) => {
                 const img = new Image();
                 img.src = src;
                 img.onload = () => {
                     loadedCount++;
+                    // Update percent display
+                    const pct = Math.round((loadedCount / totalFrames) * 100);
+                    if (loaderPercent) loaderPercent.textContent = pct + '%';
+
                     if (i === 0) {
                         resizeCanvas();
                         drawFrame(0);
+                    }
+                    // Hide loader once enough frames loaded
+                    if (loadedCount >= MIN_LOADED && loader) {
+                        loader.classList.add('loaded');
                     }
                 };
                 images[i] = img;

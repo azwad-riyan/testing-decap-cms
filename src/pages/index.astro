@@ -5,12 +5,19 @@ import ScrollHero from '../components/ScrollHero.astro';
 import ProductCard from '../components/ProductCard.astro';
 import ProductModal from '../components/ProductModal.astro';
 import Carousel from '../components/Carousel.astro';
-import BrandDivider from '../components/BrandDivider.astro';
-import EditorialGrid from '../components/EditorialGrid.astro';
 import Footer from '../components/Footer.astro';
 import { getCollection } from 'astro:content';
 
-const products = await getCollection('products');
+const allProducts = await getCollection('products');
+
+// Sort by display_order (lower = first), fallback to 50
+const sortByOrder = (a: any, b: any) =>
+    (a.data.display_order ?? 50) - (b.data.display_order ?? 50);
+
+// CMS-driven section filtering
+const featured = allProducts.filter(p => p.data.featured).sort(sortByOrder);
+const onSale   = allProducts.filter(p => p.data.on_sale).sort(sortByOrder);
+const allSorted = [...allProducts].sort(sortByOrder);
 ---
 
 <Layout>
@@ -20,19 +27,13 @@ const products = await getCollection('products');
         <!-- 1. CINEMATIC SCROLL HERO -->
         <ScrollHero />
 
-        <!-- 2. FEATURED COLLECTION — Horizontal Carousel -->
-        <Carousel title="Featured Collection" products={products} />
-        
-        <!-- 3. BRAND STATEMENT DIVIDER -->
-        <BrandDivider />
+        <!-- 2. FEATURED COLLECTION — Carousel -->
+        {featured.length > 0 && <Carousel title="Featured Collection" products={featured} />}
 
-        <!-- 4. NEW ARRIVALS — Editorial Asymmetric Grid -->
-        <EditorialGrid title="New Arrivals" products={products.slice(0, 4)} />
+        <!-- 3. ON SALE — Carousel -->
+        {onSale.length > 0 && <Carousel title="On Sale" products={onSale} />}
 
-        <!-- 5. BEST SELLERS — Carousel -->
-        <Carousel title="Best Sellers" products={products.slice(2, 8)} />
-
-        <!-- 6. FULL COLLECTION GRID -->
+        <!-- 4. OUR COLLECTION — Full Grid -->
         <section id="collection" class="py-16 relative">
             <div class="absolute inset-0 bg-gradient-section pointer-events-none"></div>
             <div class="container mx-auto px-6 relative z-10">
@@ -42,7 +43,7 @@ const products = await getCollection('products');
                     <p class="text-muted text-sm mt-4 max-w-lg mx-auto">Each fragrance is a story, crafted to evoke emotion and make every moment unforgettable.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {products.map((product, i) => (
+                    {allSorted.map((product, i) => (
                         <div class={`reveal reveal-delay-${(i % 4) + 1}`}>
                             <ProductCard product={product} />
                         </div>
@@ -51,10 +52,7 @@ const products = await getCollection('products');
             </div>
         </section>
 
-        <!-- 7. ON SALE — Carousel -->
-        <Carousel title="On Sale" products={products.slice(4, 8)} />
-
-        <!-- 8. NICHE & LUXURY COLLECTION (SEO block, refined) -->
+        <!-- 5. NICHE & LUXURY COLLECTION (SEO block) -->
         <section id="niche-collection" class="py-16 relative">
             <div class="absolute inset-0 pointer-events-none">
                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-accent/[0.02] blur-[100px] rounded-full"></div>
@@ -68,7 +66,7 @@ const products = await getCollection('products');
             </div>
         </section>
 
-        <!-- 9. NATIONWIDE DELIVERY -->
+        <!-- 6. NATIONWIDE DELIVERY -->
         <section id="delivery" class="py-16 relative">
             <div class="container mx-auto px-6 max-w-4xl text-center reveal">
                 <h2 class="text-3xl font-serif text-cream mb-6">Perfume Delivery All Over Bangladesh</h2>
@@ -79,7 +77,7 @@ const products = await getCollection('products');
             </div>
         </section>
 
-        <!-- 10. PERFUME GIFTS (SEO block) -->
+        <!-- 7. PERFUME GIFTS (SEO block) -->
         <section id="gifts" class="py-16 relative">
             <div class="absolute inset-0 pointer-events-none">
                 <div class="absolute top-0 right-0 w-[300px] h-[300px] bg-accent/[0.02] blur-[80px] rounded-full"></div>
