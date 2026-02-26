@@ -82,26 +82,16 @@ const { data, slug } = product;
     cursor: pointer;
     transform-style: preserve-3d;
     transition:
-      transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
-      box-shadow 0.4s ease;
+      transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+      box-shadow 0.5s ease,
+      border-color 0.3s ease;
 
-    /* Light-mode defaults */
-    background: #ffffff;
+    /* Warm dark card */
+    background: #1a1714;
     box-shadow:
-      0 2px 8px rgba(0,0,0,0.06),
-      0 1px 2px rgba(0,0,0,0.04);
-    border: 1px solid rgba(0,0,0,0.07);
-  }
-
-  /* Dark-mode card */
-  @media (prefers-color-scheme: dark) {
-    .product-card {
-      background: #1a1a1a;
-      box-shadow:
-        0 2px 8px rgba(0,0,0,0.4),
-        0 1px 2px rgba(0,0,0,0.3);
-      border: 1px solid rgba(255,255,255,0.07);
-    }
+      0 2px 8px rgba(0,0,0,0.3),
+      0 1px 2px rgba(0,0,0,0.2);
+    border: 1px solid rgba(198,167,94,0.06);
   }
 
   /* ─── Hover: only for real pointer devices (no touch) ───── */
@@ -109,15 +99,9 @@ const { data, slug } = product;
     .product-card:hover {
       transform: translateY(-8px) scale(1.02);
       box-shadow:
-        0 20px 60px rgba(198,167,94,0.18),
-        0 8px 24px rgba(0,0,0,0.12);
-    }
-    @media (prefers-color-scheme: dark) {
-      .product-card:hover {
-        box-shadow:
-          0 20px 60px rgba(198,167,94,0.22),
-          0 8px 24px rgba(0,0,0,0.5);
-      }
+        0 20px 60px rgba(198,167,94,0.12),
+        0 8px 24px rgba(0,0,0,0.4);
+      border-color: rgba(198,167,94,0.15);
     }
     .product-card:hover .card-shine { opacity: 1; }
     .product-card:hover .card-img { transform: scale(1.08); }
@@ -142,15 +126,14 @@ const { data, slug } = product;
     border-radius: 16px;
     background: linear-gradient(
       135deg,
-      rgba(255,255,255,0.18) 0%,
-      rgba(255,255,255,0) 55%
+      rgba(198,167,94,0.08) 0%,
+      rgba(198,167,94,0) 55%
     );
     opacity: 0;
     transition: opacity 0.4s ease;
     pointer-events: none;
     z-index: 2;
   }
-  /* shine only shown via the hover media query block above */
 
   /* ─── Image ───────────────────────────────────────── */
   .card-image-wrap {
@@ -166,21 +149,19 @@ const { data, slug } = product;
     transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
     display: block;
   }
-  /* scale handled in hover media block above */
+
   .card-scrim {
     position: absolute;
     inset: 0;
     background: linear-gradient(
       to bottom,
       rgba(0,0,0,0) 40%,
-      rgba(0,0,0,0.55) 100%
+      rgba(13,11,8,0.6) 100%
     );
     opacity: 0;
     transition: opacity 0.4s ease;
   }
-  /* scrim shown via hover media block above */
 
-  /* Badge shown via hover media block above */
   .card-accord-badge {
     position: absolute;
     bottom: 12px;
@@ -191,7 +172,7 @@ const { data, slug } = product;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: rgba(255,255,255,0.92);
-    background: rgba(198,167,94,0.75);
+    background: rgba(198,167,94,0.65);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     border-radius: 6px;
@@ -216,16 +197,13 @@ const { data, slug } = product;
 
   /* ─── Title ──────────────────────────────────────── */
   .card-title {
-    font-family: serif;
+    font-family: 'Playfair Display', serif;
     font-size: 1.3rem;
     font-weight: 600;
     line-height: 1.25;
     letter-spacing: 0.01em;
     margin: 0;
-    color: #0a0a0a;
-  }
-  @media (prefers-color-scheme: dark) {
-    .card-title { color: #f5f2eb; }
+    color: #f5f2eb;
   }
 
   /* ─── Price ──────────────────────────────────────── */
@@ -240,7 +218,7 @@ const { data, slug } = product;
   .card-price-from {
     font-size: 0.72rem;
     font-weight: 400;
-    color: #999;
+    color: #9a9387;
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
@@ -271,10 +249,11 @@ const { data, slug } = product;
     background-size: 200% 200%;
     background-position: left center;
     color: #1a1200;
-    box-shadow: 0 3px 12px rgba(198,167,94,0.35);
+    box-shadow: 0 3px 12px rgba(198,167,94,0.25);
   }
-  .card-btn:hover .card-btn-arrow {
-    /* handled in hover media query block */
+
+  .card-btn-arrow {
+    transition: transform 0.3s ease;
   }
 </style>
 

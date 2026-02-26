@@ -1,38 +1,97 @@
 ---
 ---
 
-<header class="fixed w-full top-0 z-50 transition-all duration-300 py-2 md:py-3">
+<header class="fixed w-full top-0 z-50 transition-all duration-500 py-2 md:py-3" id="site-header">
     <div class="container mx-auto px-6 flex justify-between items-center text-light">
-        <a href="#" class="flex items-center gap-3 md:gap-4 hover:opacity-80 transition-opacity">
-            <img src="/images/logo.png" alt="SCENTER Logo" class="h-20 md:h-28 w-auto" />
-            <span class="font-serif text-2xl md:text-3xl tracking-wider pt-1">Scenter</span>
+        <a href="#" class="flex items-center gap-3 md:gap-4 group">
+            <!-- Logo with glow effect to ensure visibility -->
+            <div class="relative">
+                <div class="absolute inset-0 bg-accent/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <img src="/images/logo.png" alt="SCENTER Logo" class="h-20 md:h-28 w-auto relative z-10 drop-shadow-[0_0_8px_rgba(198,167,94,0.4)]" />
+            </div>
+            <span class="font-serif text-2xl md:text-3xl tracking-wider pt-1 text-cream">Scenter</span>
         </a>
         
         <nav class="hidden md:flex space-x-8 text-sm tracking-wide uppercase">
-            <a href="#home" class="hover:text-accent transition-colors">Home</a>
-            <a href="#collection" class="hover:text-accent transition-colors">Collection</a>
-            <a href="#about" class="hover:text-accent transition-colors">About</a>
-            <a href="#contact" class="hover:text-accent transition-colors">Contact</a>
+            <a href="#home" class="nav-link">Home</a>
+            <a href="#collection" class="nav-link">Collection</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#contact" class="nav-link">Contact</a>
         </nav>
 
-        <!-- Mobile Menu Button (Hamburger) -->
-        <button id="menu-btn" class="md:hidden text-light focus:outline-none">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <!-- Mobile Menu Button -->
+        <button id="menu-btn" class="md:hidden text-light focus:outline-none relative group">
+            <div class="absolute inset-0 bg-accent/10 blur-md rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
         </button>
     </div>
 
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-dark/95 backdrop-blur-md border-b border-white/10 md:hidden">
+    <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-brand-warm/98 backdrop-blur-xl border-b border-accent/10 md:hidden">
         <nav class="flex flex-col items-center py-6 space-y-4 text-sm tracking-wide uppercase text-light">
-            <a href="#home" class="hover:text-accent transition-colors">Home</a>
-            <a href="#collection" class="hover:text-accent transition-colors">Collection</a>
-            <a href="#about" class="hover:text-accent transition-colors">About</a>
-            <a href="#contact" class="hover:text-accent transition-colors">Contact</a>
+            <a href="#home" class="nav-link-mobile">Home</a>
+            <a href="#collection" class="nav-link-mobile">Collection</a>
+            <a href="#about" class="nav-link-mobile">About</a>
+            <a href="#contact" class="nav-link-mobile">Contact</a>
         </nav>
     </div>
 </header>
+
+<style>
+    /* ─── Header scroll state ─── */
+    header {
+        background: transparent;
+    }
+
+    :global(.header-scrolled) {
+        background: rgba(13, 11, 8, 0.92) !important;
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(198, 167, 94, 0.08);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    /* ─── Nav link with animated underline ─── */
+    .nav-link {
+        position: relative;
+        color: rgb(var(--color-cream));
+        transition: color 0.3s ease;
+        padding-bottom: 4px;
+    }
+
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #c6a75e, transparent);
+        transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .nav-link:hover {
+        color: #c6a75e;
+    }
+
+    .nav-link:hover::after {
+        width: 100%;
+    }
+
+    /* ─── Mobile nav links ─── */
+    .nav-link-mobile {
+        color: rgb(var(--color-cream));
+        transition: color 0.3s ease, letter-spacing 0.3s ease;
+    }
+
+    .nav-link-mobile:hover {
+        color: #c6a75e;
+        letter-spacing: 0.15em;
+    }
+</style>
 
 <script>
     const menuBtn = document.getElementById('menu-btn');
@@ -40,5 +99,12 @@
 
     menuBtn?.addEventListener('click', () => {
         mobileMenu?.classList.toggle('hidden');
+    });
+
+    // Close mobile menu when clicking a link
+    mobileMenu?.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu?.classList.add('hidden');
+        });
     });
 </script>

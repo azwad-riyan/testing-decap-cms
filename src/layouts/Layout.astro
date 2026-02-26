@@ -17,8 +17,12 @@ const {
 		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<!-- Hero display font -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
 		<meta name="generator" content={Astro.generator} />
-        <meta name="theme-color" content="#FFFFFF" />
+        <meta name="theme-color" content="#0d0b08" />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:type" content="website" />
@@ -46,36 +50,117 @@ const {
     }
     </script>
         <style is:global>
+            @import '@fontsource/playfair-display/400.css';
+            @import '@fontsource/playfair-display/600.css';
+            @import '@fontsource/playfair-display/700.css';
+            @import '@fontsource/inter/300.css';
+            @import '@fontsource/inter/400.css';
+            @import '@fontsource/inter/500.css';
+            @import '@fontsource/inter/600.css';
+
             :root {
-                --color-primary: 255 255 255; /* Pure white bg for light mode */
-                --color-secondary: 250 250 250; /* Very subtle off-white for cards/sections */
-                --color-accent: 198 167 94; 
-                --color-cream: 0 0 0; /* Pure black text for maximum contrast */
-                --color-muted: 80 80 80; /* Darker grey for muted text */
+                /* Warm gold-tinted luxury dark theme */
+                --color-primary: 13 11 8;       /* #0d0b08 — warm near-black */
+                --color-secondary: 21 18 16;    /* #151210 — warm dark card */
+                --color-accent: 198 167 94;     /* #c6a75e — brand gold */
+                --color-cream: 245 242 235;     /* #f5f2eb — warm cream text */
+                --color-muted: 154 147 135;     /* #9a9387 — warm muted */
             }
 
-            @media (prefers-color-scheme: dark) {
-                :root {
-                    --color-primary: 15 15 15; /* Dark mode bg */
-                    --color-secondary: 24 24 24; /* Dark mode card bg */
-                    --color-accent: 198 167 94;
-                    --color-cream: 245 245 242; /* Dark mode text */
-                    --color-muted: 154 154 154;
-                }
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            html {
+                scroll-behavior: smooth;
+            }
+
+            body {
+                background-color: rgb(13, 11, 8);
+                /* Subtle noise texture via CSS for premium depth */
+                background-image: 
+                    radial-gradient(ellipse at 20% 0%, rgba(198,167,94,0.04) 0%, transparent 50%),
+                    radial-gradient(ellipse at 80% 100%, rgba(198,167,94,0.03) 0%, transparent 50%);
+                background-attachment: fixed;
+            }
+
+            /* ─── Typography refinements for luxury feel ─── */
+            h1, h2, h3, h4 {
+                font-family: 'Playfair Display', serif;
+                letter-spacing: 0.03em;
+            }
+
+            h1 { letter-spacing: 0.05em; }
+            h2 { letter-spacing: 0.04em; }
+
+            /* ─── Scroll reveal animation ─── */
+            .reveal {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                            transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            }
+
+            .reveal.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .reveal-delay-1 { transition-delay: 0.1s; }
+            .reveal-delay-2 { transition-delay: 0.2s; }
+            .reveal-delay-3 { transition-delay: 0.3s; }
+            .reveal-delay-4 { transition-delay: 0.4s; }
+
+            /* ─── Smooth section divider line ─── */
+            .gold-line {
+                width: 60px;
+                height: 1px;
+                background: linear-gradient(90deg, transparent, rgb(198,167,94), transparent);
+                margin: 0 auto;
+            }
+
+            /* ─── Custom scrollbar ─── */
+            ::-webkit-scrollbar { width: 6px; }
+            ::-webkit-scrollbar-track { background: rgb(13, 11, 8); }
+            ::-webkit-scrollbar-thumb {
+                background: rgba(198,167,94,0.3);
+                border-radius: 3px;
+            }
+            ::-webkit-scrollbar-thumb:hover {
+                background: rgba(198,167,94,0.5);
+            }
+
+            /* ─── Selection color ─── */
+            ::selection {
+                background: rgba(198,167,94,0.3);
+                color: #f5f2eb;
             }
         </style>
 	</head>
-	<body class="bg-primary text-cream font-sans antialiased overflow-x-hidden transition-colors duration-300">
+	<body class="bg-primary text-cream font-sans antialiased overflow-x-hidden">
 		<slot />
         <script>
-            // Add slight blur effect to header on scroll if needed
+            // ─── Scroll-reveal observer ───
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+            // ─── Header scroll effect ───
             const header = document.querySelector('header');
             if (header) {
                 window.addEventListener('scroll', () => {
                     if (window.scrollY > 50) {
-                        header.classList.add('bg-dark/95', 'backdrop-blur-md', 'border-b', 'border-white/10');
+                        header.classList.add('header-scrolled');
                     } else {
-                        header.classList.remove('bg-dark/95', 'backdrop-blur-md', 'border-b', 'border-white/10');
+                        header.classList.remove('header-scrolled');
                     }
                 });
             }

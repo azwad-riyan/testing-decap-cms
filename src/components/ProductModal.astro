@@ -137,15 +137,8 @@
     transition: transform 0.35s cubic-bezier(0.23,1,0.32,1), opacity 0.35s ease;
     overscroll-behavior: contain;
 
-    /* Light */
-    background: #ffffff;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.25), 0 0 0 1px rgba(0,0,0,0.06);
-}
-@media (prefers-color-scheme: dark) {
-    .modal-card {
-        background: #181818;
-        box-shadow: 0 30px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.06);
-    }
+    background: #1a1714;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(198,167,94,0.08);
 }
 @media (max-width: 640px) {
     .modal-card {
@@ -190,13 +183,10 @@
 .modal-image-col {
     position: relative;
     min-height: 280px;
-    background: #f7f5f2;  /* clean off-white so product pops */
+    background: #131110;
     border-radius: 20px 0 0 20px;
     overflow: hidden;
     position: relative;   /* needed for absolute arrows */
-}
-@media (prefers-color-scheme: dark) {
-    .modal-image-col { background: #131313; }
 }
 /* Mobile: full 1:1 square image — card scrolls so details remain accessible */
 @media (max-width: 640px) {
@@ -224,7 +214,7 @@
     height: 100%;
     transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
 }
-.gallery-slide {
+:global(.gallery-slide) {
     flex: 0 0 100%;
     width: 100%;
     height: 100%;
@@ -233,8 +223,23 @@
     justify-content: center;
     padding: 16px;
     box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
 }
-.gallery-slide img {
+
+/* Blurred background fill for landscape images */
+:global(.gallery-slide-bg) {
+    position: absolute;
+    inset: -20px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(6px) saturate(0.7) brightness(0.4);
+    transform: scale(1.2);
+    z-index: 0;
+}
+
+:global(.gallery-slide img) {
     max-width: 100%;
     max-height: 100%;
     width: auto;
@@ -242,6 +247,8 @@
     object-fit: contain;   /* show full product, never cropped */
     display: block;
     border-radius: 4px;
+    position: relative;
+    z-index: 1;
 }
 
 /* ─── Arrows ─────────────────────────────────────────── */
@@ -330,9 +337,8 @@
     font-weight: 400;
     line-height: 1.2;
     margin: 0;
-    color: #111;
+    color: #f0ede6;
 }
-@media (prefers-color-scheme: dark) { .modal-title { color: #f0ede6; } }
 
 .modal-accords {
     font-size: 0.7rem;
@@ -352,7 +358,7 @@
     flex: 1;
     padding: 10px 0;
     border-radius: 8px;
-    border: 1.5px solid rgba(0,0,0,0.15);
+    border: 1.5px solid rgba(255,255,255,0.12);
     background: transparent;
     cursor: pointer;
     font-size: 0.75rem;
@@ -360,10 +366,7 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     transition: all 0.25s ease;
-    color: #555;
-}
-@media (prefers-color-scheme: dark) {
-    .size-pill { border-color: rgba(255,255,255,0.15); color: #aaa; }
+    color: #aaa;
 }
 .size-pill.active {
     background: linear-gradient(135deg, #c6a75e, #e8c87a);
@@ -383,10 +386,7 @@
     gap: 0;
     border-radius: 10px;
     overflow: hidden;
-    border: 1px solid rgba(0,0,0,0.07);
-}
-@media (prefers-color-scheme: dark) {
-    .notes-table { border-color: rgba(255,255,255,0.07); }
+    border: 1px solid rgba(255,255,255,0.07);
 }
 
 .notes-row {
@@ -397,10 +397,7 @@
     padding: 9px 14px;
 }
 .notes-row:nth-child(odd) {
-    background: rgba(0,0,0,0.025);
-}
-@media (prefers-color-scheme: dark) {
-    .notes-row:nth-child(odd) { background: rgba(255,255,255,0.03); }
+    background: rgba(255,255,255,0.03);
 }
 
 .notes-label {
@@ -414,19 +411,13 @@
 .notes-value {
     font-size: 0.85rem;
     line-height: 1.45;
-    color: #444;
-}
-@media (prefers-color-scheme: dark) {
-    .notes-value { color: #b0b0b0; }
+    color: #b0b0b0;
 }
 
 .notes-divider {
     height: 1px;
     background: rgba(0,0,0,0.07);
     margin: 2px 0;
-}
-@media (prefers-color-scheme: dark) {
-    .notes-divider { background: rgba(255,255,255,0.07); }
 }
 
 /* ─── Price ─────────────────────────────────────────── */
@@ -436,10 +427,7 @@
     gap: 3px;
     font-size: 1.8rem;
     font-weight: 600;
-    color: #111;
-}
-@media (prefers-color-scheme: dark) {
-    .modal-price-wrap { color: #f0ede6; }
+    color: #f0ede6;
 }
 .modal-currency {
     font-size: 1.2rem;
@@ -528,9 +516,10 @@
         galleryImages = images;
         galleryIndex  = 0;
 
-        // Build slides
+        // Build slides (with blurred bg for landscape images)
         track.innerHTML = images.map(src => `
             <div class="gallery-slide">
+                <div class="gallery-slide-bg" style="background-image: url('${src}')"></div>
                 <img src="${src}" alt="${title}" loading="lazy" />
             </div>
         `).join('');

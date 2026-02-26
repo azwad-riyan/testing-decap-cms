@@ -1,41 +1,163 @@
 ---
 ---
 
-<section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
-    <!-- Background Image -->
+<section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Animated gradient background -->
     <div class="absolute inset-0 z-0">
-         <!-- Placeholder for hero image. User didn't provide specific hero image, so using a dark luxury gradient/placeholder or one of the product images blurred/darkened
-              Since we don't have a specific hero image, we will use a gradient for now or maybe one of the product images?
-              Let's use a dark gradient with a subtle pattern or just a dark background. 
-              Ideally we should have a hero image. Let's assume we can use the first product image but highly blurred/darkened if no hero.
-              Or just a nice CSS gradient. Let's go with CSS gradient for elegance. -->
-        <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/65 to-black/80 z-10"></div>
-        <!-- Simulating a luxury background -->
-        <div class="w-full h-full bg-[url('/images/products/5.jpg')] bg-cover bg-center opacity-30 scale-110 blur-sm"></div> 
+        <!-- Base warm dark -->
+        <div class="absolute inset-0 bg-brand-warm"></div>
+        
+        <!-- Animated radial glow -->
+        <div class="hero-glow hero-glow-1"></div>
+        <div class="hero-glow hero-glow-2"></div>
+        <div class="hero-glow hero-glow-3"></div>
+
+        <!-- Subtle product background -->
+        <div class="absolute inset-0 bg-[url('/images/products/5.jpg')] bg-cover bg-center opacity-10 scale-110 blur-sm"></div>
+        
+        <!-- Dark overlay for text readability -->
+        <div class="absolute inset-0 bg-gradient-to-b from-brand-warm/90 via-brand-warm/70 to-brand-warm/95 z-10"></div>
+    </div>
+
+    <!-- "Crafted to Feel" watermark typography -->
+    <div class="absolute inset-0 z-10 flex items-center justify-center pointer-events-none overflow-hidden">
+        <span class="hero-watermark font-serif text-[8rem] md:text-[14rem] lg:text-[18rem] text-accent/[0.03] uppercase tracking-[0.3em] whitespace-nowrap select-none">
+            Crafted to Feel
+        </span>
     </div>
 
     <!-- Content -->
-    <div class="relative z-10 text-center px-6 anime-fade-up max-w-4xl mx-auto">
-        <h1 class="text-3xl md:text-5xl lg:text-6xl font-serif text-white mb-6 tracking-wider leading-tight" style="text-shadow: 0 2px 8px rgba(0,0,0,0.8);">
-            Buy Authentic Premium Perfume in Bangladesh | SCENTER
-        </h1>
-        <p class="text-white/90 text-lg md:text-xl font-light mb-8 tracking-wide max-w-2xl mx-auto" style="text-shadow: 0 1px 4px rgba(0,0,0,0.7);">
-            Welcome to the leading <strong class="font-normal text-white">premium perfume shop in Bangladesh</strong>. 
-            Discover timeless luxury and <strong class="font-normal text-white">buy authentic perfume online BD</strong> 
-            with guarantee. Experience world-class scents with our reliable <strong class="font-normal text-white">nationwide delivery</strong>.
-        </p>
-        <a href="#collection" class="inline-block border-2 border-white text-white px-8 py-3 uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-all duration-300" style="text-shadow: none; letter-spacing: 0.2em;">
-            Explore Collection
-        </a>
+    <div class="relative z-20 text-center px-6 max-w-4xl mx-auto">
+        <!-- Brand motto -->
+        <div class="hero-stagger-1 opacity-0">
+            <p class="text-accent text-sm md:text-base uppercase tracking-[0.35em] mb-4 font-sans font-medium">
+                — Crafted to Feel —
+            </p>
+        </div>
+
+        <!-- Heading -->
+        <div class="hero-stagger-2 opacity-0">
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-serif text-cream mb-6 tracking-wider leading-tight">
+                Welcome to <span class="text-accent">Scenter</span>
+            </h1>
+        </div>
+
+        <!-- Simplified subtitle -->
+        <div class="hero-stagger-3 opacity-0">
+            <p class="text-cream/80 text-base md:text-lg font-light mb-10 tracking-wide max-w-2xl mx-auto leading-relaxed">
+                A premium perfume oil shop in Bangladesh. Discover timeless luxury and get authentic perfume oil online with our reliable nationwide delivery.
+            </p>
+        </div>
+
+        <!-- CTA Button -->
+        <div class="hero-stagger-4 opacity-0">
+            <a href="#collection" class="hero-cta inline-block relative group">
+                <span class="absolute inset-0 bg-gradient-gold rounded-sm opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500"></span>
+                <span class="relative inline-block border border-accent/60 text-cream px-10 py-4 uppercase tracking-[0.25em] text-sm font-medium hover:bg-accent hover:text-brand-warm transition-all duration-500">
+                    Explore Collection
+                </span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 scroll-indicator">
+        <div class="w-px h-12 bg-gradient-to-b from-accent/60 to-transparent mx-auto mb-2"></div>
+        <span class="text-accent/40 text-[0.6rem] uppercase tracking-[0.3em] font-sans">Scroll</span>
     </div>
 </section>
 
 <style>
-    @keyframes fadeUp {
-        from { opacity: 0; transform: translateY(20px); }
+    /* ─── Animated gradient glows ─── */
+    .hero-glow {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        z-index: 5;
+    }
+
+    .hero-glow-1 {
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(198,167,94,0.08) 0%, transparent 70%);
+        top: -10%;
+        left: -10%;
+        animation: glowDrift1 12s ease-in-out infinite;
+    }
+
+    .hero-glow-2 {
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(198,167,94,0.06) 0%, transparent 70%);
+        bottom: -15%;
+        right: -5%;
+        animation: glowDrift2 15s ease-in-out infinite;
+    }
+
+    .hero-glow-3 {
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(198,167,94,0.05) 0%, transparent 70%);
+        top: 40%;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: glowDrift3 10s ease-in-out infinite;
+    }
+
+    @keyframes glowDrift1 {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        33% { transform: translate(40px, 30px) scale(1.1); }
+        66% { transform: translate(-20px, 15px) scale(0.95); }
+    }
+
+    @keyframes glowDrift2 {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        40% { transform: translate(-30px, -25px) scale(1.05); }
+        70% { transform: translate(15px, -10px) scale(0.9); }
+    }
+
+    @keyframes glowDrift3 {
+        0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.5; }
+        50% { transform: translateX(-50%) scale(1.15); opacity: 1; }
+    }
+
+    /* ─── Staggered entrance animations ─── */
+    .hero-stagger-1 {
+        animation: heroFadeUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
+    }
+    .hero-stagger-2 {
+        animation: heroFadeUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards;
+    }
+    .hero-stagger-3 {
+        animation: heroFadeUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.9s forwards;
+    }
+    .hero-stagger-4 {
+        animation: heroFadeUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.2s forwards;
+    }
+
+    @keyframes heroFadeUp {
+        from { opacity: 0; transform: translateY(30px); }
         to { opacity: 1; transform: translateY(0); }
     }
-    .anime-fade-up {
-        animation: fadeUp 1s ease-out forwards;
+
+    /* ─── Watermark slow drift ─── */
+    .hero-watermark {
+        animation: watermarkDrift 30s linear infinite;
+    }
+
+    @keyframes watermarkDrift {
+        0% { transform: translateX(5%); }
+        50% { transform: translateX(-5%); }
+        100% { transform: translateX(5%); }
+    }
+
+    /* ─── Scroll indicator pulse ─── */
+    .scroll-indicator {
+        animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+        0%, 100% { opacity: 0.6; transform: translateX(-50%) translateY(0); }
+        50% { opacity: 1; transform: translateX(-50%) translateY(5px); }
     }
 </style>
