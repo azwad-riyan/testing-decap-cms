@@ -427,9 +427,14 @@
 }
 
 /* ─── Price ─────────────────────────────────────────── */
+/* ─── Price ─────────────────────────────────────────── */
 .modal-sale-banner {
     display: inline-block;
     margin-bottom: 15px;
+    transition: opacity 0.2s;
+}
+.modal-sale-banner.hidden {
+    display: none !important;
 }
 .modal-sale-banner span {
     background: linear-gradient(135deg, #c04040, #d35050);
@@ -457,9 +462,13 @@
     font-size: 1.2rem;
     font-weight: 400;
     color: #7a756d;
-    text-decoration: line-through;
-    text-decoration-color: rgba(200,80,80,0.7);
+    text-decoration: line-through !important;
+    text-decoration-color: rgba(220,50,50,0.8) !important;
+    text-decoration-thickness: 2px !important;
     margin-right: 4px;
+}
+.modal-original-price.hidden {
+    display: none !important;
 }
 
 .modal-currency {
