@@ -75,8 +75,14 @@
                 </div>
             </div>
 
+            <!-- Sale Banner (hidden by default) -->
+            <div id="modal-sale-banner" class="modal-sale-banner hidden">
+                <span id="modal-sale-pct">SAVE 0%</span>
+            </div>
+
             <!-- Price -->
             <div class="modal-price-wrap">
+                <span id="modal-original-price" class="modal-original-price hidden">৳0</span>
                 <span class="modal-currency">৳</span>
                 <span id="modal-price" class="modal-price-num">0</span>
             </div>
@@ -421,14 +427,41 @@
 }
 
 /* ─── Price ─────────────────────────────────────────── */
+.modal-sale-banner {
+    display: inline-block;
+    margin-bottom: 15px;
+}
+.modal-sale-banner span {
+    background: linear-gradient(135deg, #c04040, #d35050);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 6px;
+    padding: 6px 14px;
+    box-shadow: 0 3px 10px rgba(192,64,64,0.3);
+}
+
 .modal-price-wrap {
     display: flex;
     align-items: baseline;
-    gap: 3px;
+    gap: 8px;
     font-size: 1.8rem;
     font-weight: 600;
     color: #f0ede6;
 }
+
+.modal-original-price {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #7a756d;
+    text-decoration: line-through;
+    text-decoration-color: rgba(200,80,80,0.7);
+    margin-right: 4px;
+}
+
 .modal-currency {
     font-size: 1.2rem;
     color: #c6a75e;
@@ -557,14 +590,34 @@
 
     function updatePriceAndLinks() {
         if (!currentProductData) return;
-        const price = selectedSize === '6ML'
-            ? currentProductData.price_6ml
-            : currentProductData.price_15ml;
-        set('modal-price', price);
+        const d = currentProductData;
+        const origPrice = selectedSize === '6ML' ? d.price_6ml : d.price_15ml;
+        const salePrice = selectedSize === '6ML' ? d.sale_price_6ml : d.sale_price_15ml;
+        const isOnSale = d.on_sale && salePrice && salePrice < origPrice;
+
+        // Sale banner
+        const banner = document.getElementById('modal-sale-banner');
+        const salePctEl = document.getElementById('modal-sale-pct');
+        const origPriceEl = document.getElementById('modal-original-price');
+
+        if (isOnSale) {
+            const pct = Math.round(((origPrice - salePrice) / origPrice) * 100);
+            if (banner) { banner.classList.remove('hidden'); }
+            if (salePctEl) salePctEl.textContent = `SAVE ${pct}%`;
+            if (origPriceEl) {
+                origPriceEl.textContent = `\u09F3${origPrice}`;
+                origPriceEl.classList.remove('hidden');
+            }
+            set('modal-price', salePrice);
+        } else {
+            if (banner) banner.classList.add('hidden');
+            if (origPriceEl) origPriceEl.classList.add('hidden');
+            set('modal-price', origPrice);
+        }
 
         const waBtn = document.getElementById('whatsapp-btn') as HTMLAnchorElement;
         if (waBtn) {
-            const msg = `I want to order ${currentProductData.title} (${selectedSize})`;
+            const msg = `I want to order ${d.title} (${selectedSize})`;
             waBtn.href = `https://wa.me/8801571316610?text=${encodeURIComponent(msg)}`;
         }
         const fbBtn = document.getElementById('facebook-btn') as HTMLAnchorElement;
