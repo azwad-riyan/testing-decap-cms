@@ -5,3 +5,4 @@ dist/
 .astro/
 coverage/
 DATA/
+public/images/hero-seq/      
