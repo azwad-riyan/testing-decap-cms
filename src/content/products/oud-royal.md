@@ -1,8 +1,7 @@
 ---
 title: Shahi Owd
 image: /images/products/shahi-owd.png
-images:
-  - /images/products/whisk_0fa64db177e9d29884f4c1887e1b5ce4dr.png
+images: []
 price_6ml: 350
 price_15ml: 700
 sale_price_6ml: 325
