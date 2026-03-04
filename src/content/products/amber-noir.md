@@ -1,6 +1,6 @@
 ---
 title: "Soft Moon"
-image: "/images/products/2.jpg"
+image: "/images/products/soft-moon.png"
 price_6ml: 450
 price_15ml: 850
 top_notes: "Red Lychee, Kiwi, Quince"

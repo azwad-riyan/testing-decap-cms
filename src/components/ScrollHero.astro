@@ -1,12 +1,15 @@
 ---
 // ScrollHero.astro — Cinematic scroll-driven image sequence hero
+// Reduced scroll heights: 200vh desktop / 150vh mobile
+// Two-phase frame mapping: frames 0-102 in phase 1, 103-191 in phase 2
+// Autoplay: auto-advances to frame 60 on load before any scroll
 const TOTAL_FRAMES = 192;
 const frameFiles = Array.from({ length: TOTAL_FRAMES }, (_, i) => 
     `/images/hero-seq/ezgif-frame-${String(i + 1).padStart(3, '0')}.jpg`
 );
 ---
 
-<!-- Scroll container: 400vh tall for storytelling progression -->
+<!-- Scroll container: 200vh desktop / 150vh mobile -->
 <section id="home" class="scroll-hero-container">
     
     <!-- Sticky viewport -->
@@ -78,12 +81,18 @@ const frameFiles = Array.from({ length: TOTAL_FRAMES }, (_, i) =>
 </script>
 
 <style>
-    /* ─── Scroll container ─── */
+    /* ─── Scroll container — REDUCED HEIGHTS ─── */
     .scroll-hero-container {
         position: relative;
-        height: 400vh;
-        /* Match the frame background exactly */
+        height: 200vh;          /* was 400vh — completes in one scroll */
         background: #0a0804;
+    }
+
+    /* Mobile: even shorter for smoother experience */
+    @media (max-width: 768px) {
+        .scroll-hero-container {
+            height: 150vh;      /* ~half screen of scrolling on mobile */
+        }
     }
 
     /* ─── Sticky viewport ─── */
@@ -165,7 +174,6 @@ const frameFiles = Array.from({ length: TOTAL_FRAMES }, (_, i) =>
         align-items: center;
         pointer-events: none;
         opacity: 0;
-        /* Slide animations handled by JS via transform */
         transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         will-change: opacity, transform;
     }
@@ -205,7 +213,7 @@ const frameFiles = Array.from({ length: TOTAL_FRAMES }, (_, i) =>
         margin-right: 5vw;
     }
 
-    /* Dark backdrop behind opening text for stronger contrast */
+    /* Dark backdrop behind opening text */
     .scroll-text-backdrop {
         background: radial-gradient(ellipse at center, rgba(5,4,2,0.85) 0%, rgba(10,8,4,0.5) 50%, transparent 75%);
         padding: 50px 80px;
@@ -233,7 +241,7 @@ const frameFiles = Array.from({ length: TOTAL_FRAMES }, (_, i) =>
     /* Beat 4 sits above blur */
     .scroll-overlay-4 { z-index: 3; }
 
-    /* ─── Typography — Cormorant Garamond for hero, bold & editorial ─── */
+    /* ─── Typography ─── */
     .scroll-tag {
         font-family: 'Cormorant Garamond', 'Playfair Display', serif;
         font-size: 0.95rem;
@@ -359,6 +367,7 @@ const frameFiles = Array.from({ length: TOTAL_FRAMES }, (_, i) =>
             gap: 12px;
         }
         .scroll-progress-track { display: none; }
+        .scroll-text-backdrop { padding: 30px 32px; }
     }
 </style>
 
@@ -370,17 +379,26 @@ const frameFiles = Array.from({ length: TOTAL_FRAMES }, (_, i) =>
 
         const frameFiles: string[] = (window as any).__heroFrames;
         const totalFrames: number = (window as any).__heroTotalFrames;
+
+        // ─── Two-phase split ───
+        // Phase 1: frames 0–102 (indices 0 to 102)
+        // Phase 2: frames 103–191 (indices 103 to 191)
+        const PHASE_SPLIT = 103; // frame index where phase 2 starts
+
         const images: HTMLImageElement[] = new Array(totalFrames);
         let loadedCount = 0;
         let currentFrame = 0;
         let targetFrame = 0;
         let animId: number;
 
+        // ─── Scroll-only state ───
+        let hasUserScrolled = false;
+
         // ─── Resize canvas to fill viewport ───
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            drawFrame(currentFrame);
+            drawFrame(Math.round(currentFrame));
         }
 
         // ─── Draw a frame to canvas (cover mode) ───
@@ -393,7 +411,6 @@ const frameFiles = Array.from({ length: TOTAL_FRAMES }, (_, i) =>
             const iW = img.naturalWidth;
             const iH = img.naturalHeight;
 
-            // Cover fit calculation
             const scale = Math.max(cW / iW, cH / iH);
             const w = iW * scale;
             const h = iH * scale;
@@ -407,7 +424,7 @@ const frameFiles = Array.from({ length: TOTAL_FRAMES }, (_, i) =>
         // ─── Preload all frames with progress ───
         const loader = document.getElementById('hero-loader');
         const loaderPercent = document.getElementById('hero-loader-percent');
-        const MIN_LOADED = 30; // minimum frames before hiding loader
+        const MIN_LOADED = 30;
 
         function preloadFrames() {
             frameFiles.forEach((src, i) => {
@@ -415,7 +432,6 @@ const frameFiles = Array.from({ length: TOTAL_FRAMES }, (_, i) =>
                 img.src = src;
                 img.onload = () => {
                     loadedCount++;
-                    // Update percent display
                     const pct = Math.round((loadedCount / totalFrames) * 100);
                     if (loaderPercent) loaderPercent.textContent = pct + '%';
 
@@ -423,7 +439,7 @@ const frameFiles = Array.from({ length: TOTAL_FRAMES }, (_, i) =>
                         resizeCanvas();
                         drawFrame(0);
                     }
-                    // Hide loader once enough frames loaded
+                    // Hide loader once enough frames loaded, then start autoplay
                     if (loadedCount >= MIN_LOADED && loader) {
                         loader.classList.add('loaded');
                     }
@@ -432,7 +448,7 @@ const frameFiles = Array.from({ length: TOTAL_FRAMES }, (_, i) =>
             });
         }
 
-        // ─── Scroll → Frame mapping ───
+        // ─── Scroll → Frame mapping (two-phase) ───
         function getScrollProgress(): number {
             const container = document.querySelector('.scroll-hero-container') as HTMLElement;
             if (!container) return 0;
@@ -442,11 +458,23 @@ const frameFiles = Array.from({ length: TOTAL_FRAMES }, (_, i) =>
             return progress;
         }
 
-        // ─── Interpolated animation loop ───
-        function animate() {
-            // Smooth interpolation toward target frame
+        function progressToFrame(progress: number): number {
+            // Phase 1: progress 0–0.5 → frames 0–(PHASE_SPLIT-1)
+            // Phase 2: progress 0.5–1.0 → frames PHASE_SPLIT–(totalFrames-1)
+            if (progress <= 0.5) {
+                const p1 = progress / 0.5; // 0 to 1 within phase 1
+                return p1 * (PHASE_SPLIT - 1);
+            } else {
+                const p2 = (progress - 0.5) / 0.5; // 0 to 1 within phase 2
+                return PHASE_SPLIT + p2 * (totalFrames - 1 - PHASE_SPLIT);
+            }
+        }
+
+        // ─── Main animation loop ───
+        function animate(timestamp: number) {
+            // Smooth interpolation toward target — easing factor 0.25 (snappier than 0.15)
             const diff = targetFrame - currentFrame;
-            currentFrame += diff * 0.15; // Easing factor — buttery smooth
+            currentFrame += diff * 0.25;
 
             const frameIndex = Math.round(currentFrame);
             const clampedIndex = Math.max(0, Math.min(totalFrames - 1, frameIndex));
@@ -463,32 +491,21 @@ const frameFiles = Array.from({ length: TOTAL_FRAMES }, (_, i) =>
             overlays.forEach(overlay => {
                 const show = parseFloat(overlay.dataset.scrollShow || '0');
                 const hide = parseFloat(overlay.dataset.scrollHide || '1');
-                const anim = overlay.dataset.anim || 'fade'; // 'fade', 'slide-left', 'slide-right'
+                const anim = overlay.dataset.anim || 'fade';
                 const isPersistent = hide > 100;
-
-                const fadeIn = 0.03;
-                const fadeOut = 0.03;
 
                 let state = 'hidden';
 
                 if (isPersistent) {
-                    // Persistent overlay (beat 4) — fade in, never hide
-                    if (progress >= show) {
-                        state = 'visible-fade';
-                    } else {
-                        state = 'hidden';
-                    }
+                    state = progress >= show ? 'visible-fade' : 'hidden';
                 } else if (progress < show) {
-                    // Before this beat
                     if (anim === 'slide-left') state = 'hidden-left';
                     else if (anim === 'slide-right') state = 'hidden-right';
                     else state = 'hidden';
                 } else if (progress >= show && progress <= hide) {
-                    // Within this beat — visible
                     if (anim === 'fade') state = 'visible-fade';
                     else state = 'visible';
                 } else {
-                    // Past this beat — exit
                     if (anim === 'slide-left') state = 'exit-left';
                     else if (anim === 'slide-right') state = 'exit-right';
                     else state = 'hidden';
@@ -500,11 +517,7 @@ const frameFiles = Array.from({ length: TOTAL_FRAMES }, (_, i) =>
             // Blur overlay for final beat
             const blurOverlay = document.getElementById('hero-blur-overlay');
             if (blurOverlay) {
-                if (progress >= 0.90) {
-                    blurOverlay.classList.add('active');
-                } else {
-                    blurOverlay.classList.remove('active');
-                }
+                blurOverlay.classList.toggle('active', progress >= 0.90);
             }
 
             // Progress bar
@@ -514,14 +527,16 @@ const frameFiles = Array.from({ length: TOTAL_FRAMES }, (_, i) =>
 
         // ─── Scroll handler ───
         function onScroll() {
+            hasUserScrolled = true;
             const progress = getScrollProgress();
-            targetFrame = progress * (totalFrames - 1);
+            targetFrame = progressToFrame(progress);
         }
 
         // ─── Init ───
         preloadFrames();
+        resizeCanvas();
         window.addEventListener('scroll', onScroll, { passive: true });
         window.addEventListener('resize', resizeCanvas);
-        animate();
+        requestAnimationFrame(animate);
     })();
 </script>

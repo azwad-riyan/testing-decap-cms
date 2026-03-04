@@ -1,6 +1,6 @@
 ---
 title: "Hawas Fire"
-image: "/images/products/8.jpg"
+image: "/images/products/hawas-fire.png"
 price_6ml: 450
 price_15ml: 850
 top_notes: "Clary Sage"

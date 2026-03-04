@@ -1,6 +1,6 @@
 ---
 title: "Afnan 9PM Rebel"
-image: "/images/products/4.jpg"
+image: "/images/products/afnan-9pm-rebel.png"
 price_6ml: 450
 price_15ml: 850
 top_notes: "Pineapple, Mandarin, Granny Smith Apple"

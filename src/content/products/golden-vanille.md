@@ -1,6 +1,6 @@
 ---
 title: Vampire Blood
-image: /images/products/6.jpg
+image: /images/products/vampire-blood.png
 price_6ml: 400
 price_15ml: 800
 sale_price_6ml: 350

@@ -1,6 +1,6 @@
 ---
 title: Fruit Bomb
-image: /images/products/3.jpg
+image: /images/products/fruit-bomb.png
 price_6ml: 350
 price_15ml: 700
 sale_price_6ml: 300

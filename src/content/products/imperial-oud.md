@@ -1,6 +1,6 @@
 ---
 title: "Cool Wave"
-image: "/images/products/5.jpg"
+image: "/images/products/cool-wave.png"
 price_6ml: 450
 price_15ml: 850
 top_notes: "Lavender, Watermelon, Sicilian Orange, Red Fruits"

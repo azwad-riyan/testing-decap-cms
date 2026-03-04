@@ -1,6 +1,6 @@
 ---
 title: "Dessert Light"
-image: "/images/products/7.jpg"
+image: "/images/products/dessert-light.png"
 price_6ml: 350
 price_15ml: 700
 top_notes: "Precious Woods"
